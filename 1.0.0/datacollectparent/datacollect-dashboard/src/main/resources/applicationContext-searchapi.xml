@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="elasticSearchQueryBuilder" abstract="true" class="org.wispersd.core.datacollect.searchapi.queries.ElasticSearchQueryBuilder">
+		<property name="elasticSearchClient" ref="elasticSearchClient"></property>
+	</bean> 
+	
+	<bean id="defaultOMSWorkflowEventSearchService" class="org.wispersd.core.datacollect.searchapi.impl.DefaultOMSWorkflowEventSearchService">
+		<property name="elasticSearchClient" ref="elasticSearchClient"></property>
+		<property name="workflowActionsQueryBuilder">
+			<bean parent="elasticSearchQueryBuilder" class="org.wispersd.core.datacollect.searchapi.queries.ActionsByWorkflowQueryBuilder"/>
+		</property>
+		<property name="workflowActionsRespBuilder">
+			<bean class="org.wispersd.core.datacollect.searchapi.resp.ActionsByWorkflowRespBuilder"/>
+		</property>
+		<property name="workflowByTimeRangeQueryBuilders">
+			<list>
+				<bean parent="elasticSearchQueryBuilder" class="org.wispersd.core.datacollect.searchapi.queries.WorkflowStatusCountQueryBuilder"/>
+				<bean parent="elasticSearchQueryBuilder" class="org.wispersd.core.datacollect.searchapi.queries.WorkflowActionExecStatQueryBuilder"/>
+			</list>
+		</property>
+		<property name="workflowByTimeRangeRespBuilders">
+			<list>
+				<bean class="org.wispersd.core.datacollect.searchapi.resp.WorkflowStatusCountRespBuilder"/>
+				<bean class="org.wispersd.core.datacollect.searchapi.resp.WorkflowActionExecStatRespBuilder"/>
+			</list>
+		</property>
+		<property name="workflowNodeByTimeRangeQueryBuilders">
+			<list>
+				<bean parent="elasticSearchQueryBuilder" class="org.wispersd.core.datacollect.searchapi.queries.WorkflowActionExecHistoQueryBuilder"/>
+				<bean parent="elasticSearchQueryBuilder" class="org.wispersd.core.datacollect.searchapi.queries.WorkflowActionExecTopslowQueryBuilder"/>
+			</list>
+		</property>
+		<property name="workflowNodeByTimeRangeRespBuilders">
+			<list>
+				<bean class="org.wispersd.core.datacollect.searchapi.resp.WorkflowActionExecHistoRespBuilder"/>
+				<bean class="org.wispersd.core.datacollect.searchapi.resp.WorkflowActionExecTopslowRespBuilder"/>
+			</list>
+		</property>
+	</bean>	
+</beans>		

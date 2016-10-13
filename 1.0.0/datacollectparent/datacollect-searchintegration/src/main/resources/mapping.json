@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "processName": {"index":  "not_analyzed", "type": "string"},
+    "processCode": {"index":  "not_analyzed", "type": "string"},
+    "startTime": {
+     	"type":   "date",
+     	"format": "yyyy/MM/dd HH:mm:ss" 
+    },
+    "endTime": {
+    	"type":   "date",
+    	"format": "yyyy/MM/dd HH:mm:ss"
+    }
+  }  
+}    

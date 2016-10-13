@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="../css/jquery-ui.min.css" rel="stylesheet"></link>
+		<link href="../css/jquery-ui.theme.min.css" rel="stylesheet"></link>
+	</head>
+	<body ng-app="omsdashboardapp">
+		<div ng-controller="OMSDashboardController" ng-init="initworkflowactions()">
+			Workflow: <select ng-model="workflow" ng-options="workflow for workflow in workflows"></select><br/>
+			Start Time: <input type="text" name="startDate" ng-model="startDate" jqdatepicker/> &nbsp;&nbsp; <input type="text" name="startTime" ng-model="startTime"/><br/>
+			End Time: <input type="text" name="endDate" ng-model="endDate" jqdatepicker/> &nbsp;&nbsp; <input type="text" name="endTime" ng-model="endTime"/><br/>
+			<input type="button" name="searchWorkflow" value="search workflow" ng-click="searchWorkflow()"/>
+			<br/>
+			<div id="workflowchart1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" barchart chart-title="workflow status" series-name="workflow" chart-data="piedataWorkflowStatus">
+			</div>
+			<br/>
+			<div id="workflowchart2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" barchart chart-title="workflow action execution status" series-name="node" chart-data="piedataActionStatus">
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script type="text/javascript" src="../js/highchart/highcharts.js"></script>
+		<script type="text/javascript" src="../js/highchart/highcharts-3d.js"></script>
+		<script type="text/javascript" src="../js/highchart/modules/exporting.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../js/dashboard.js"></script>
+	</body>
+</html>

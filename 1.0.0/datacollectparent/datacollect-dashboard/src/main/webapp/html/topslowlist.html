@@ -1,0 +1,15 @@
+<table>
+	<caption>Top Slow Queries</caption>
+	<thead>
+		<tr>
+			<td>Action Key</td>
+			<td>Start Time</td>
+			<td>Execution Time</td>
+		</tr>
+		<tr ng-repeat="nextRow in listData track by $index">
+			<td>{{nextRow.key}}</td>
+			<td>{{nextRow.startTime}}</td>
+			<td>{{nextRow.executionTime}}</td>
+		</tr>
+	</thead>
+</table>
